@@ -5,7 +5,11 @@ using UnityEngine;
 public class Ennemies : MonoBehaviour
 {
     int hitpoints;
-    float despawnedTimer = 5f;
+    float Timeout = 5f;
+    bool isDead;
+     public GameObject ennemies;
+    protected Rigidbody[] ListEnnemies;
+    protected Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,19 +19,35 @@ public class Ennemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
 
+    IEnumerator despawnedTimer()
+    {
+        Timeout -= 1;
+        yield  return Timeout;
     }
     void Onhit()
     {
         //donne du dommages a l'ennemies selon l'armes
         hitpoints--;
         if (hitpoints < 0)
-            die();
+            isDead = true;
+        StartCoroutine(despawnedTimer());
+            delete();
     }
-    void die()
+    void Die(bool value)
     {
-        
-        ra
+        foreach (var r in ListEnnemies)
+        {
+            r.isKinematic =!value;
+        }
+    }
+    void delete()
+    {
+        if (Timeout <= 0)
+            Destroy(ennemies);
+              
     }
         
 

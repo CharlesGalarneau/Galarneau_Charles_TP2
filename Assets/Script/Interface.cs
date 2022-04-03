@@ -23,6 +23,7 @@ public class Interface : MonoBehaviour
     }
     void ButtonPlayClicked()
     {
+        
         ButtonPlay.gameObject.SetActive(false);
         ButtonPause.gameObject.SetActive(true);
     }
