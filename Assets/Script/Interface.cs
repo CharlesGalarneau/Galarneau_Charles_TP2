@@ -26,6 +26,7 @@ public class Interface : MonoBehaviour
         
         ButtonPlay.gameObject.SetActive(false);
         ButtonPause.gameObject.SetActive(true);
+        
     }
     void ButtonPauseClicked()
     {
