@@ -7,6 +7,9 @@ public class Interface : MonoBehaviour
 {
     public Button ButtonPlay;
     public Button ButtonPause;
+    float Lifepoints;
+    float CoinsColled;
+    float ennemieskilled;
     // Start is called before the first frame update
     void Start()
     {

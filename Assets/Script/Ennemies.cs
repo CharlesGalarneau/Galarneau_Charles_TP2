@@ -11,15 +11,20 @@ public class Ennemies : MonoBehaviour
      GameObject ennemies;
      NavMeshAgent agent;
     protected Rigidbody[] ListEnnemies;
+    protected gamemanager gamemanager;
     protected Animator animator;
     Vector3 Destionation;
+    protected Collider colliderEnnemies;
     // Start is called before the first frame update
     void Start()
     {
         Destionation = Destination();
+       // ennemies = GetComponentInChildren<GameObject>();
         ListEnnemies = GetComponentsInChildren<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        colliderEnnemies = GetComponent<Collider>();
         animator = GetComponent<Animator>();
+        gamemanager = FindObjectOfType<gamemanager>();
         Die(false);
         agent.SetDestination(Destionation);
         
@@ -28,7 +33,7 @@ public class Ennemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        FinChemin();
     }
 
     IEnumerator despawnedTimer()
@@ -46,10 +51,15 @@ public class Ennemies : MonoBehaviour
         for (int i = 0; i < 5;) 
         { 
             StartCoroutine(despawnedTimer());
-            delete();
+           
             i ++;
         }
+        if (Timeout <= 0)
+        {
+            delete();
+        }
     }
+
     void Die(bool value)
     {
         foreach (var r in ListEnnemies)
@@ -62,31 +72,35 @@ public class Ennemies : MonoBehaviour
     }
     void delete()
     {
-        if (Timeout <= 0)
+       
             Destroy(ennemies);
               
     }
     void FinChemin()
     {
-        if (
-
-        return FinChemin;
-
-
+        Destroy(ennemies);
+        gamemanager.LooseLife();
+      
     }
-    Vector3 Destination()
-        
+   
+
+Vector3 Destination()
 
     {
-
-   
+        //Une Fonction pour Definir un vecteur de position
         return new Vector3(14.13f, 1.97f, -46.26184f);
-        // Update is called once per frame
-
-
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        
+            // Si l'un des ennemies touche le chateau le joueur pert une vie
+            if (other.CompareTag("FinChemin"))
+            {
+            Debug.Log("FIUC");
+                FinChemin();
+            }
+    }
 
-
-
+    
 }

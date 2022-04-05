@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombTurret : MonoBehaviour
+public class Warrok : MonoBehaviour
 {
 
     Rigidbody[] rbs;
@@ -13,14 +13,28 @@ public class BombTurret : MonoBehaviour
         rbs = GetComponentsInChildren<Rigidbody>();
         animator = GetComponent<Animator>();
         //desactiver le ragdoll
-       
+        ToggleRagdoll(false);
     }
 
     public void TakeDamage()
     {
-        
+        Die();
     }
-    
+    // Update is called once per frame
+    void Die()
+    {
+        //Activer le ragdoll
+        ToggleRagdoll(true);
 
-    
+    }
+
+    void ToggleRagdoll(bool value)
+
+    {
+        foreach (var r in rbs)
+        {
+            r.isKinematic = !value;
+        }
+        animator.enabled = !value;
+    }
 }
