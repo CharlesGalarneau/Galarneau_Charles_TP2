@@ -18,14 +18,15 @@ public class Ennemies : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destionation = Destination();
-       // ennemies = GetComponentInChildren<GameObject>();
+        
+       
         ListEnnemies = GetComponentsInChildren<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         colliderEnnemies = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         gamemanager = FindObjectOfType<gamemanager>();
         Die(false);
+        Destionation = gamemanager.Destination();
         agent.SetDestination(Destionation);
         
     }
@@ -33,7 +34,7 @@ public class Ennemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FinChemin();
+       
     }
 
     IEnumerator despawnedTimer()
@@ -56,7 +57,7 @@ public class Ennemies : MonoBehaviour
         }
         if (Timeout <= 0)
         {
-            delete();
+            gamemanager.delete(ennemies);
         }
     }
 
@@ -70,26 +71,7 @@ public class Ennemies : MonoBehaviour
         }
             animator.enabled = !value;
     }
-    void delete()
-    {
-       
-            Destroy(ennemies);
-              
-    }
-    void FinChemin()
-    {
-        Destroy(ennemies);
-        gamemanager.LooseLife();
-      
-    }
-   
 
-Vector3 Destination()
-
-    {
-        //Une Fonction pour Definir un vecteur de position
-        return new Vector3(14.13f, 1.97f, -46.26184f);
-    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -98,7 +80,7 @@ Vector3 Destination()
             if (other.CompareTag("FinChemin"))
             {
             Debug.Log("FIUC");
-                FinChemin();
+                gamemanager.FinChemin(ennemies);
             }
     }
 

@@ -8,12 +8,12 @@ public class gamemanager : MonoBehaviour
     //protected GameObject[] ListEnnemies;
     bool AllEnnnemiesDead = false;
     bool isGameOver;
-    float PlayerLife  = 3;
+    public float PlayerLife  = 3;
     float nbRounds =1;
     // Start is called before the first frame update
     void Start()
     {
-       
+        //ennemies = GetComponent<Ennemies>();
     }
 
     // Update is called once per frame
@@ -53,6 +53,26 @@ public class gamemanager : MonoBehaviour
         PlayerLife--;
 
         
+    }
+    public void delete(GameObject ennemies)
+    {
+
+        Destroy(ennemies);
+
+    }
+    public void FinChemin(GameObject ennemies)
+    {
+        delete(ennemies);
+        LooseLife();
+
+    }
+
+
+    public Vector3 Destination()
+
+    {
+        //Une Fonction pour Definir un vecteur de position
+        return new Vector3(14.13f, 1.97f, -46.26184f);
     }
 }
 
