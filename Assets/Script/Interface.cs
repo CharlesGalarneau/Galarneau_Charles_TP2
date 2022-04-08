@@ -28,6 +28,9 @@ public class Interface : MonoBehaviour
 
         gamemanager = GetComponent<gamemanager>();
         txtLife.text = gamemanager.PlayerLife.ToString();
+        txtennemieskilled.text = gamemanager.EnnemiesKilled.ToString();
+        txtMoney.text = gamemanager.Money.ToString();
+        txtvague.text = gamemanager.nbRounds.ToString();
     }
 
     // Update is called once per frame

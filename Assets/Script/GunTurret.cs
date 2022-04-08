@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunTurret : MonoBehaviour
+public class GunTurret : Turret
 {
     
     // Start is called before the first frame update

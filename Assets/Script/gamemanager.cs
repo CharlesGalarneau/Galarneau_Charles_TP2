@@ -5,15 +5,18 @@ using UnityEngine;
 public class gamemanager : MonoBehaviour
 {
     public GameObject ennemies;
-    //protected GameObject[] ListEnnemies;
+    public GameObject[] ListEnnemies;
     bool AllEnnnemiesDead = false;
     bool isGameOver;
-    public float PlayerLife  = 3;
-    float nbRounds =1;
+    public float PlayerLife  = 3f;
+    public float EnnemiesKilled = 0f;
+    public float Money = 0f;
+    public float nbRounds = 1f;
     // Start is called before the first frame update
     void Start()
     {
-        //ennemies = GetComponent<Ennemies>();
+       // ListEnnemies += ennemies  ;
+        
     }
 
     // Update is called once per frame
@@ -62,7 +65,7 @@ public class gamemanager : MonoBehaviour
     }
     public void FinChemin(GameObject ennemies)
     {
-        delete(ennemies);
+        Destroy(ennemies);
         LooseLife();
 
     }
