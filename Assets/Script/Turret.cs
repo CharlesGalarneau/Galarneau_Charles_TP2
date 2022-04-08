@@ -9,14 +9,18 @@ public class Turret : MonoBehaviour
     Transform Target;
     float range = 15f;
     float DistanceEnnemies;
-    private GameObject[] ListeEnnemis;
+    List<GameObject> ListEnnemies;
     public Transform TurretRotation;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ListEnnemies = gamemanager.ListEnnemies;
+        gamemanager = GetComponent<gamemanager>();
         ennemies = GetComponent<GameObject>();
+        
+        
         InvokeRepeating("ennemiesinReach", 0f, 0.5f);
+        
     }
 
     // Update is called once per frame
@@ -26,13 +30,13 @@ public class Turret : MonoBehaviour
         {
             return;
         }
-        //Definie une potition vers ou tournées
+        //Definie une potition vers ou tourn?es
         Vector3 DirectionRotation = Target.position - transform.position;
         //Definie un endroit ou regarder avec la rotation
         Quaternion DirectionRegarder = Quaternion.LookRotation(DirectionRotation);
         //Convertion des quarternion en euler angles 
         Vector3 rotation = Quaternion.Lerp(TurretRotation.rotation,DirectionRegarder, Time.deltaTime * range).eulerAngles;
-        // fais le déplacement.
+        // fais le d?placement.
         TurretRotation.rotation = Quaternion.Euler(0f,rotation.y,0f);
     }
     
@@ -40,7 +44,7 @@ public class Turret : MonoBehaviour
     {
        
        
-        foreach (GameObject ennemies in ListeEnnemis)
+        foreach (GameObject ennemies in ListEnnemies)
         {
 
             DistanceEnnemies = Vector3.Distance(transform.position, ennemies.transform.position);

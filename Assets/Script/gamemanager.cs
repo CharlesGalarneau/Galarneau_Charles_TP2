@@ -5,43 +5,86 @@ using UnityEngine;
 public class gamemanager : MonoBehaviour
 {
     public GameObject ennemies;
-    public GameObject[] ListEnnemies;
-    bool AllEnnnemiesDead = false;
+    public List<GameObject> ListEnnemies;
+    bool AllEnnnemiesDead = true;
     bool isGameOver;
-    public float PlayerLife  = 3f;
-    public float EnnemiesKilled = 0f;
-    public float Money = 0f;
-    public float nbRounds = 1f;
+    public GameObject ZombieSkeleteton;
+    public GameObject NightShade;
+    public GameObject Warrok;
+    public int PlayerLife  = 3;
+    public int EnnemiesKilled = 0;
+    public int Money = 5;
+    public int nbRounds = 1;
+    private int CounterEnnemies = 0;
+    private int Intervale = 2;
     // Start is called before the first frame update
     void Start()
     {
-       // ListEnnemies += ennemies  ;
-        
+        ListEnnemies = new List<GameObject>();
+
+
+       // if (!AllEnnnemiesDead)
+        {
+            for (int i = 0; i < nbRounds; i++)
+            {
+                StartCoroutine(SpawnerZombies());
+            }
+            
+            for (int i = 0; i < nbRounds; i++)
+            {
+                StartCoroutine(SpawnerWarrok());
+            }
+            
+            for (int i = 0; i < nbRounds; i++)
+            {
+                StartCoroutine(SpawnerNightshade());
+                
+            }
+            AllEnnnemiesDead = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        if (!AllEnnnemiesDead)
-        {
-            for (int i = 0; i < nbRounds; i++)
-            {
-                StartCoroutine(Spawner());
-            }
-            AllEnnnemiesDead = true;
-        }
+
+        
 
         if (PlayerLife >=0)
         {
             GameOver();
         }
     }
-    IEnumerator Spawner()
+    IEnumerator SpawnerZombies()
     {
         Vector3 location = new Vector3(-11.25f, 0.04f, 55.01f);
         //Spawn des ennemies selon l'ennemies au spawn points
-        GameObject EnnemiesSpawn = Instantiate(ennemies, location, Quaternion.identity).gameObject;
+        
+        GameObject EnnemiesSpawn = Instantiate(ZombieSkeleteton, location, Quaternion.identity).gameObject;
+        ListEnnemies.Add(EnnemiesSpawn);
+        yield return new WaitForSeconds(Intervale);
+        yield return EnnemiesSpawn;
+
+    }
+    IEnumerator SpawnerWarrok()
+    {
+        Vector3 location = new Vector3(-11.25f, 0.04f, 55.01f);
+        //Spawn des ennemies selon l'ennemies au spawn points
+
+        GameObject EnnemiesSpawn = Instantiate(Warrok, location, Quaternion.identity).gameObject;
+        ListEnnemies.Add(EnnemiesSpawn);
+        yield return new WaitForSeconds(Intervale);
+        yield return EnnemiesSpawn;
+
+    }
+    IEnumerator SpawnerNightshade()
+    {
+        Vector3 location = new Vector3(-11.25f, 0.04f, 55.01f);
+        //Spawn des ennemies selon l'ennemies au spawn points
+
+        GameObject EnnemiesSpawn = Instantiate(NightShade, location, Quaternion.identity).gameObject;
+        ListEnnemies.Add(EnnemiesSpawn);
+        yield return new WaitForSeconds(Intervale);
         yield return EnnemiesSpawn;
 
     }
@@ -65,6 +108,7 @@ public class gamemanager : MonoBehaviour
     }
     public void FinChemin(GameObject ennemies)
     {
+        ListEnnemies.Remove(ennemies);
         Destroy(ennemies);
         LooseLife();
 
@@ -77,5 +121,6 @@ public class gamemanager : MonoBehaviour
         //Une Fonction pour Definir un vecteur de position
         return new Vector3(14.13f, 1.97f, -46.26184f);
     }
+
 }
 

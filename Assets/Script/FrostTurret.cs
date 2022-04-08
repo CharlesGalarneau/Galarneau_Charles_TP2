@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrostProjectile : MonoBehaviour
+public class FrostTurret : Turret
 {
    
     // Update is called once per frame
