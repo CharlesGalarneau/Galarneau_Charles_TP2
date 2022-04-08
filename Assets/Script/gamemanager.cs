@@ -11,12 +11,19 @@ public class gamemanager : MonoBehaviour
     public GameObject ZombieSkeleteton;
     public GameObject NightShade;
     public GameObject Warrok;
-    public int PlayerLife  = 3;
+    public int PlayerLife = 3;
     public int EnnemiesKilled = 0;
     public int Money = 5;
     public int nbRounds = 1;
     private int CounterEnnemies = 0;
     private int Intervale = 2;
+    public int playerLife { get { return PlayerLife; } set { PlayerLife = value; } }
+    public int ennemiesKilled { get { return EnnemiesKilled; } set { EnnemiesKilled = value; } }
+    public int money { get { return Money; } set { Money = value; } }
+    public int nbrounds { get { return nbRounds; } set { nbRounds = value; } }
+   
+
+    //public int playerLife { set { value = PlayerLife; } }
     // Start is called before the first frame update
     void Start()
     {

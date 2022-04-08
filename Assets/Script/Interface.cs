@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Interface : gamemanager
+public class Interface : MonoBehaviour
 {
     public Button ButtonPlay;
     public Button ButtonPause;
@@ -22,10 +22,10 @@ public class Interface : gamemanager
 
         ButtonPlay.onClick.AddListener(ButtonPlayClicked);
         ButtonPause.onClick.AddListener(ButtonPauseClicked);
-
+       
         ButtonPause.gameObject.SetActive(false);
 
-        gamemanager = GetComponent<gamemanager>();
+        gamemanager = FindObjectOfType<gamemanager>();
         
     }
     
@@ -38,6 +38,7 @@ public class Interface : gamemanager
                    Mathf.Floor(timer / 60),   // Minutes
                    Mathf.Floor(timer) % 60);  // seconds
         txtLife.text = gamemanager.PlayerLife.ToString();
+        Debug.Log(gamemanager.PlayerLife.ToString());
         txtennemieskilled.text = gamemanager.EnnemiesKilled.ToString();
         txtMoney.text = gamemanager.Money.ToString();
         txtvague.text = gamemanager.nbRounds.ToString();

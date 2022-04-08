@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 1414675505066073040}
   m_Layer: 0
   m_Name: nightshade
-  m_TagString: Untagged
+  m_TagString: Ennemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -73,16 +73,7 @@ public class Ennemies : MonoBehaviour
     }
 
 
-    void OnTriggerEnter(Collider other)
-    {
-        
-            // Si l'un des ennemies touche le chateau le joueur pert une vie
-            if (other.CompareTag("FinChemin"))
-            {
-            Debug.Log("FIUC");
-                gamemanager.FinChemin(ennemies);
-            }
-    }
+   
 
     
 }

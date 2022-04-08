@@ -9,23 +9,47 @@ public class Turret : MonoBehaviour
     Transform Target;
     float range = 15f;
     float DistanceEnnemies;
-    List<GameObject> ListEnnemies;
+    GameObject[] ListEnnemies;
+    private string ennemiesTag = "Ennemies";
     public Transform TurretRotation;
+    public GameObject Projectile;
+    private float FireCountdown;
+    public Transform Barrel;
     // Start is called before the first frame update
     void Start()
     {
-        ListEnnemies = gamemanager.ListEnnemies;
         gamemanager = GetComponent<gamemanager>();
-        ennemies = GetComponent<GameObject>();
-        
-        
-        InvokeRepeating("ennemiesinReach", 0f, 0.5f);
-        
-    }
+         ennemies = GetComponent<GameObject>();
 
+
+         InvokeRepeating("ennemiesinReach", 1f, 0.5f);
+
+    }
+    void ennemiesinReach()
+    {
+       
+        ListEnnemies = GameObject.FindGameObjectsWithTag(ennemiesTag);
+
+        foreach (GameObject ennemies in ListEnnemies)
+        {
+           
+            DistanceEnnemies = Vector3.Distance(transform.position, ennemies.transform.position);
+            //}
+            if (DistanceEnnemies <= range)
+            {
+                Target = ennemies.transform;
+                Debug.Log("FUCKS");
+            }
+            else
+            {
+                Target = null;
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
+        ennemiesinReach();
         if (Target == null) 
         {
             return;
@@ -37,27 +61,20 @@ public class Turret : MonoBehaviour
         //Convertion des quarternion en euler angles 
         Vector3 rotation = Quaternion.Lerp(TurretRotation.rotation,DirectionRegarder, Time.deltaTime * range).eulerAngles;
         // fais le d?placement.
-        TurretRotation.rotation = Quaternion.Euler(0f,rotation.y,0f);
+        TurretRotation.rotation = Quaternion.Euler(-89.98f, rotation.y, 0f);
+        if (FireCountdown <= 0)
+        {
+            Shooting();
+                FireCountdown +=1f;
+        }
+        FireCountdown -= Time.deltaTime;
+    }
+    public void Shooting()
+    {
+        GameObject projectile = Instantiate(Projectile, Barrel.position, Barrel.rotation);
     }
     
-    void ennemiesinReach()
-    {
-       
-       
-        foreach (GameObject ennemies in ListEnnemies)
-        {
-
-            DistanceEnnemies = Vector3.Distance(transform.position, ennemies.transform.position);
-        }
-        if (ennemies !=null && DistanceEnnemies <= range )
-        {
-            Target = ennemies.transform;
-        }
-        else
-        {
-            Target = null;
-        }    
-    }
+  
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, range);
