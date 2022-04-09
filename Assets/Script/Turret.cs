@@ -8,6 +8,7 @@ public class Turret : MonoBehaviour
     gamemanager gamemanager;
     Transform Target;
     float range = 15f;
+    float MultiplicateurAngles = 10f;
     float DistanceEnnemies;
     GameObject[] ListEnnemies;
     private string ennemiesTag = "Ennemies";
@@ -16,14 +17,15 @@ public class Turret : MonoBehaviour
     protected float FireCountdown;
     public Transform Barrel;
     public ParticleSystem AnimationTir;
-
+    public AudioClip Son;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         gamemanager = GetComponent<gamemanager>();
          ennemies = GetComponent<GameObject>();
-
+        audioSource = GetComponent<AudioSource>();
         Setup();
          InvokeRepeating("ennemiesinReach", 1f, 0.5f);
 
@@ -66,7 +68,7 @@ public class Turret : MonoBehaviour
         //Definie un endroit ou regarder avec la rotation
         Quaternion DirectionRegarder = Quaternion.LookRotation(DirectionRotation);
         //Convertion des quarternion en euler angles 
-        Vector3 rotation = Quaternion.Lerp(TurretRotation.rotation,DirectionRegarder, Time.deltaTime * range).eulerAngles;
+        Vector3 rotation = Quaternion.Lerp(TurretRotation.rotation,DirectionRegarder, Time.deltaTime * MultiplicateurAngles).eulerAngles;
         // fais le d?placement.
         TurretRotation.rotation = Quaternion.Euler(-89.98f, rotation.y, 0f);
         if (FireCountdown <= 0)
@@ -79,6 +81,7 @@ public class Turret : MonoBehaviour
     protected  void Shooting()
     {
         GameObject projectile = Instantiate(Projectile, Barrel.position, Barrel.rotation);
+        audioSource.PlayOneShot(Son, 0.5f);
         AnimationTir.Play();
         
     }

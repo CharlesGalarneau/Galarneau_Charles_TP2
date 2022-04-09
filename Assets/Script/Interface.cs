@@ -18,11 +18,13 @@ public class Interface : MonoBehaviour
     public Text txtLife;
     public Text txtennemieskilled;
     public gamemanager gamemanager;
+    public GameObject SelectedTurret;
+    public BuildManager BuildManager;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        //SelectedTurret = BuildManager.TurretBuilder;
         ButtonPlay.onClick.AddListener(ButtonPlayClicked);
         ButtonPause.onClick.AddListener(ButtonPauseClicked);
         ButtonTowerGun.onClick.AddListener(ButtonGunTurretClicked);
@@ -31,7 +33,8 @@ public class Interface : MonoBehaviour
         ButtonPause.gameObject.SetActive(false);
 
         gamemanager = FindObjectOfType<gamemanager>();
-        
+       // BuildManager = FindObjectOfType<BuildManager>();
+
     }
     
     // Update is called once per frame
@@ -64,14 +67,29 @@ public class Interface : MonoBehaviour
     void ButtonGunTurretClicked()
     {
         Debug.Log("SUCC");
+        if (gamemanager.Money >=3)
+        {
 
+        }
     }
     void ButtonCannonTurretClicked()
     {
         Debug.Log("SUCC");
+        if (gamemanager.Money >= 5)
+        {
+
+        }
+        else
+        {
+            Debug.Log("SUCC");
+        }
     }
     void ButtonSlowerTurretClicked()
     {
         Debug.Log("SUCC");
+        if (gamemanager.Money >= 4)
+        {
+
+        }
     }
 }

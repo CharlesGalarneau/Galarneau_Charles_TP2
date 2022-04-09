@@ -8,25 +8,31 @@ public class BaseTower : MonoBehaviour
     private Renderer rend;
     private Color BaseColor;
     private GameObject turret;
+    BuildManager buildManager;
 
     // Start is called before the first frame update
     private void Start()
     {
         rend = GetComponent<Renderer>();
         BaseColor = rend.material.color;
+        buildManager = BuildManager.instance;
     }
     private void OnMouseDown()
     {
+        if (buildManager.GetTurretToBuild() == null)
+            return;
         if (turret !=null)
         {
-            Debug.Log("there is alredy a tower there MORON");
+            Debug.Log("there is alredy a tower there");
             return;
         }
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+        GameObject turretToBuild = buildManager.GetTurretToBuild();
         turret = (GameObject)Instantiate(turretToBuild, transform.position, transform.rotation);
     }
     void OnMouseEnter()
     {
+        if (buildManager.GetTurretToBuild() == null)
+            return;
         rend.material.color = HoverColor;
     }
 
