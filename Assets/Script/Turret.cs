@@ -13,15 +13,18 @@ public class Turret : MonoBehaviour
     private string ennemiesTag = "Ennemies";
     public Transform TurretRotation;
     public GameObject Projectile;
-    private float FireCountdown;
+    protected float FireCountdown;
     public Transform Barrel;
+    public ParticleSystem AnimationTir;
+
+
     // Start is called before the first frame update
     void Start()
     {
         gamemanager = GetComponent<gamemanager>();
          ennemies = GetComponent<GameObject>();
 
-
+        Setup();
          InvokeRepeating("ennemiesinReach", 1f, 0.5f);
 
     }
@@ -47,6 +50,10 @@ public class Turret : MonoBehaviour
         }
     }
     // Update is called once per frame
+    protected virtual void Setup()
+    {
+        FireCountdown = 3;
+    }
     void Update()
     {
         ennemiesinReach();
@@ -65,13 +72,15 @@ public class Turret : MonoBehaviour
         if (FireCountdown <= 0)
         {
             Shooting();
-                FireCountdown +=1f;
+                FireCountdown ++ ;
         }
         FireCountdown -= Time.deltaTime;
     }
-    public void Shooting()
+    protected  void Shooting()
     {
         GameObject projectile = Instantiate(Projectile, Barrel.position, Barrel.rotation);
+        AnimationTir.Play();
+        
     }
     
   

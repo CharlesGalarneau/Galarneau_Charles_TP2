@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     public void ReachEnnemies(Transform _target)
     {
-        target = _target
+        target = _target;
     }
     void Start()
     {

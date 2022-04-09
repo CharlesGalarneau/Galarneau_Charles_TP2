@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FinChemin
   - Ennemies
+  - Pathway
   layers:
   - Default
   - TransparentFX

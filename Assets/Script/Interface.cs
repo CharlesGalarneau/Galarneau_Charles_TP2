@@ -7,7 +7,10 @@ public class Interface : MonoBehaviour
 {
     public Button ButtonPlay;
     public Button ButtonPause;
-   
+    public Button ButtonTowerGun;
+    public Button ButtonCannonGun;
+    public Button ButtonSlowerGun;
+
     public Text txtTimer;
     float timer;
     public Text txtvague;
@@ -22,7 +25,9 @@ public class Interface : MonoBehaviour
 
         ButtonPlay.onClick.AddListener(ButtonPlayClicked);
         ButtonPause.onClick.AddListener(ButtonPauseClicked);
-       
+        ButtonTowerGun.onClick.AddListener(ButtonGunTurretClicked);
+        ButtonCannonGun.onClick.AddListener(ButtonCannonTurretClicked);
+        ButtonSlowerGun.onClick.AddListener(ButtonSlowerTurretClicked);
         ButtonPause.gameObject.SetActive(false);
 
         gamemanager = FindObjectOfType<gamemanager>();
@@ -55,5 +60,18 @@ public class Interface : MonoBehaviour
     {
         ButtonPlay.gameObject.SetActive(true);
         ButtonPause.gameObject.SetActive(false);
+    }
+    void ButtonGunTurretClicked()
+    {
+        Debug.Log("SUCC");
+
+    }
+    void ButtonCannonTurretClicked()
+    {
+        Debug.Log("SUCC");
+    }
+    void ButtonSlowerTurretClicked()
+    {
+        Debug.Log("SUCC");
     }
 }
