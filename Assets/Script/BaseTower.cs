@@ -19,16 +19,27 @@ public class BaseTower : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (buildManager.GetTurretToBuild() == null)
-            return;
-        if (turret !=null)
+       if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("there is alredy a tower there");
+            if (buildManager.GetTurretToBuild() == null)
+            {
+                
+                return;
+            }
+
+            if (turret !=null)
+            {
+                Destroy(turret);
             return;
-        }
+            }
         GameObject turretToBuild = buildManager.GetTurretToBuild();
         turret = (GameObject)Instantiate(turretToBuild, transform.position, transform.rotation);
+        }
+       
+
+
     }
+
     void OnMouseEnter()
     {
         if (buildManager.GetTurretToBuild() == null)

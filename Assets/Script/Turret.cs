@@ -15,10 +15,12 @@ public class Turret : MonoBehaviour
     public Transform TurretRotation;
     public GameObject Projectile;
     protected float FireCountdown;
+    protected int GoldCost;
     public Transform Barrel;
     public ParticleSystem AnimationTir;
     public AudioClip Son;
     AudioSource audioSource;
+    public LineRenderer bulletTrail;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,7 @@ public class Turret : MonoBehaviour
          InvokeRepeating("ennemiesinReach", 1f, 0.5f);
 
     }
-    void ennemiesinReach()
+    protected void ennemiesinReach()
     {
        
         ListEnnemies = GameObject.FindGameObjectsWithTag(ennemiesTag);
@@ -43,7 +45,7 @@ public class Turret : MonoBehaviour
             if (DistanceEnnemies <= range)
             {
                 Target = ennemies.transform;
-                Debug.Log("FUCKS");
+                
             }
             else
             {
@@ -55,11 +57,16 @@ public class Turret : MonoBehaviour
     protected virtual void Setup()
     {
         FireCountdown = 3;
+        GoldCost = 1;
     }
     void Update()
     {
         ennemiesinReach();
         if (Target == null) 
+        {
+            return;
+        }
+        if (TurretRotation == null)
         {
             return;
         }
@@ -80,10 +87,14 @@ public class Turret : MonoBehaviour
     }
     protected  void Shooting()
     {
+
+
         GameObject projectile = Instantiate(Projectile, Barrel.position, Barrel.rotation);
+        Bullet bullet = projectile.GetComponent<Bullet>();
+        bullet.ReachEnnemies(Target);
         audioSource.PlayOneShot(Son, 0.5f);
         AnimationTir.Play();
-        
+
     }
     
   

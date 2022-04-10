@@ -5,22 +5,31 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
     BuildManager buildManager;
+    gamemanager Gamemanager;
+    public int money;
     void Start()
     {
+      //  money = Gamemanager.Money;
         buildManager = BuildManager.instance;
     }
     public void GunTurretButton()
     {
-        buildManager.SetTurretToBuild(buildManager.GunTurret);
+      //  if (money >= 1)
+            buildManager.SetTurretToBuild(buildManager.GunTurret);
+         money-=1;
     }
     public void FrostTurretButton()
     {
-        buildManager.SetTurretToBuild(buildManager.FrostTurret);
+       // if (money >= 3)
+            buildManager.SetTurretToBuild(buildManager.FrostTurret);
     }
 
     public void CannonTurretButton()
     {
+     // if (money >=5)
+
         buildManager.SetTurretToBuild(buildManager.CannonTurret);
+
     }
 
 

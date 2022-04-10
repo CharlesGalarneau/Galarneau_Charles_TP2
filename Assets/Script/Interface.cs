@@ -67,7 +67,7 @@ public class Interface : MonoBehaviour
     void ButtonGunTurretClicked()
     {
         Debug.Log("SUCC");
-        if (gamemanager.Money >=3)
+        if (gamemanager.Money >13)
         {
 
         }
@@ -77,7 +77,7 @@ public class Interface : MonoBehaviour
         Debug.Log("SUCC");
         if (gamemanager.Money >= 5)
         {
-
+            
         }
         else
         {
@@ -87,7 +87,7 @@ public class Interface : MonoBehaviour
     void ButtonSlowerTurretClicked()
     {
         Debug.Log("SUCC");
-        if (gamemanager.Money >= 4)
+        if (gamemanager.Money >= 3)
         {
 
         }
