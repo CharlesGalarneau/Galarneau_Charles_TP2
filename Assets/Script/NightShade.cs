@@ -5,9 +5,7 @@ using UnityEngine.AI;
 
 public class NightShade : Ennemies
 {
-    private float hitpoint = 2f;
-    private float vitesse = 5f;
-    private float purse = 2f;
+    //permet d'activer l'animation de flotte du nightshade
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Pathway"))

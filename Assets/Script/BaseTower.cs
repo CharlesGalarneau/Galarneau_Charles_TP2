@@ -17,21 +17,23 @@ public class BaseTower : MonoBehaviour
         BaseColor = rend.material.color;
         buildManager = BuildManager.instance;
     }
+    //quand on clique sur une tour elle mais la tour qu'on a choisi
     private void OnMouseDown()
     {
        if (Input.GetButtonDown("Fire1"))
-        {
+        {//si on a pas choisi de tourelle rien ne se passe
             if (buildManager.GetTurretToBuild() == null)
             {
                 
                 return;
             }
-
+            //enlève l'ancienne tourelle si on clique sur l'encienne
             if (turret !=null)
             {
                 Destroy(turret);
             return;
             }
+            //crée la tourelle choisis
         GameObject turretToBuild = buildManager.GetTurretToBuild();
         turret = (GameObject)Instantiate(turretToBuild, transform.position, transform.rotation);
         }
@@ -41,13 +43,13 @@ public class BaseTower : MonoBehaviour
     }
 
     void OnMouseEnter()
-    {
+    {//losque glise notre souris sur la base elle change de couleur
         if (buildManager.GetTurretToBuild() == null)
             return;
         rend.material.color = HoverColor;
     }
 
-    // Update is called once per frame
+    //retoure a sa couleur normale quand on sort
     void OnMouseExit()
     {
         rend.material.color = BaseColor;

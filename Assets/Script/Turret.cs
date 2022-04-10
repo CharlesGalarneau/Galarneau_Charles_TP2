@@ -5,7 +5,7 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     private GameObject ennemies;
-    gamemanager gamemanager;
+    GameManager gamemanager;
     Transform Target;
     float range = 15f;
     float MultiplicateurAngles = 10f;
@@ -21,11 +21,12 @@ public class Turret : MonoBehaviour
     public AudioClip Son;
     AudioSource audioSource;
     public LineRenderer bulletTrail;
+    GameObject TargetCollider;
 
-    // Start is called before the first frame update
+    // appelles des différentes composantes besoins
     void Start()
     {
-        gamemanager = GetComponent<gamemanager>();
+        gamemanager = GetComponent<GameManager>();
          ennemies = GetComponent<GameObject>();
         audioSource = GetComponent<AudioSource>();
         Setup();
@@ -34,7 +35,7 @@ public class Turret : MonoBehaviour
     }
     protected void ennemiesinReach()
     {
-       
+       //détermine les ennemies les plus proches et fais une liste
         ListEnnemies = GameObject.FindGameObjectsWithTag(ennemiesTag);
 
         foreach (GameObject ennemies in ListEnnemies)
@@ -51,14 +52,17 @@ public class Turret : MonoBehaviour
             {
                 Target = null;
             }
+
         }
     }
     // Update is called once per frame
     protected virtual void Setup()
     {
+        //change les variable selon la tour
         FireCountdown = 3;
         GoldCost = 1;
     }
+    //trouve la position pour viser l'ennemies 
     void Update()
     {
         ennemiesinReach();
@@ -87,7 +91,7 @@ public class Turret : MonoBehaviour
     }
     protected  void Shooting()
     {
-
+        //tire l'ennemies et joue les annimations et le son
 
         GameObject projectile = Instantiate(Projectile, Barrel.position, Barrel.rotation);
         Bullet bullet = projectile.GetComponent<Bullet>();

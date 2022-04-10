@@ -7,15 +7,20 @@ public class Bullet : MonoBehaviour
 {
     private Transform target;
     public float speed = 70f;
-    
-    // Start is called before the first frame update
+    GameManager gamemanager;
+    int Degat = 1;
+    //se trouve une target a visée
+    private void Start()
+    {
+        gamemanager = GetComponent<GameManager>();
+    }
     public void ReachEnnemies(Transform _target)
     {
         target = _target;
     }
-    
 
-    // Update is called once per frame
+
+    //calcule la potion pour toucher l'ennemies
     void Update()
     {
         if (transform == null)
@@ -23,6 +28,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Vector3 Deplacement = target.position - transform.position;
         float distence = speed * Time.deltaTime;
         if (Deplacement.magnitude <= distence)
@@ -32,9 +38,21 @@ public class Bullet : MonoBehaviour
         }
         transform.Translate(Deplacement.normalized * distence, Space.World);
     }
-   void HitTarget()
+    //joue l'animation et les dégats selon un range
+    void HitTarget()
     {
-        
+        //gamemanager.TakeDamage(target,Degat);
         Destroy(gameObject);
     }
-  }
+    //est capable d'infliger des dégats au ennemies seul qui fonction
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Ennemies"))
+        {
+            
+           Ennemies ennemies = other.GetComponent<Ennemies>();
+           
+            ennemies.Degats = true;
+        }
+    }
+}

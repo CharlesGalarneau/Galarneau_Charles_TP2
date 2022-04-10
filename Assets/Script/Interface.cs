@@ -17,27 +17,25 @@ public class Interface : MonoBehaviour
     public Text txtMoney;
     public Text txtLife;
     public Text txtennemieskilled;
-    public gamemanager gamemanager;
+    public GameManager gamemanager;
     public GameObject SelectedTurret;
     public BuildManager BuildManager;
     
-    // Start is called before the first frame update
+    //appelle les différentes fonctions des boutons et composants
     void Start()
     {
         //SelectedTurret = BuildManager.TurretBuilder;
         ButtonPlay.onClick.AddListener(ButtonPlayClicked);
         ButtonPause.onClick.AddListener(ButtonPauseClicked);
-        ButtonTowerGun.onClick.AddListener(ButtonGunTurretClicked);
-        ButtonCannonGun.onClick.AddListener(ButtonCannonTurretClicked);
-        ButtonSlowerGun.onClick.AddListener(ButtonSlowerTurretClicked);
+       
         ButtonPause.gameObject.SetActive(false);
 
-        gamemanager = FindObjectOfType<gamemanager>();
+        gamemanager = FindObjectOfType<GameManager>();
        // BuildManager = FindObjectOfType<BuildManager>();
 
     }
     
-    // Update is called once per frame
+    //fait le temps et les différente valeur des composents de l'interface
     void Update()
     {
         timer += Time.deltaTime;
@@ -47,11 +45,12 @@ public class Interface : MonoBehaviour
                    Mathf.Floor(timer) % 60);  // seconds
         txtLife.text = gamemanager.PlayerLife.ToString();
         Debug.Log(gamemanager.PlayerLife.ToString());
-        txtennemieskilled.text = gamemanager.EnnemiesKilled.ToString();
+        txtennemieskilled.text = gamemanager.Killed.ToString();
         txtMoney.text = gamemanager.Money.ToString();
-        txtvague.text = gamemanager.nbRounds.ToString();
+        txtvague.text = gamemanager.IVague.ToString();
 
     }
+    //les fonctions pour les boutons play et stop
     void ButtonPlayClicked()
     {
         
@@ -64,32 +63,5 @@ public class Interface : MonoBehaviour
         ButtonPlay.gameObject.SetActive(true);
         ButtonPause.gameObject.SetActive(false);
     }
-    void ButtonGunTurretClicked()
-    {
-        Debug.Log("SUCC");
-        if (gamemanager.Money >13)
-        {
-
-        }
-    }
-    void ButtonCannonTurretClicked()
-    {
-        Debug.Log("SUCC");
-        if (gamemanager.Money >= 5)
-        {
-            
-        }
-        else
-        {
-            Debug.Log("SUCC");
-        }
-    }
-    void ButtonSlowerTurretClicked()
-    {
-        Debug.Log("SUCC");
-        if (gamemanager.Money >= 3)
-        {
-
-        }
-    }
+   
 }

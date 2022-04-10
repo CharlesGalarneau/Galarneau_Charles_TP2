@@ -16,11 +16,12 @@ public class BuildManager : MonoBehaviour
     }
    
    
-    
+    //retourne la tourelle que l'on veut construire
     public GameObject GetTurretToBuild()
     {
         return TurretToBuild;
     }
+    //définie la tourelle que l'on veut construire
    public void SetTurretToBuild(GameObject turret)
     {
         TurretToBuild = turret;

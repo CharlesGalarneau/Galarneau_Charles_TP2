@@ -5,13 +5,15 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
     BuildManager buildManager;
-    gamemanager Gamemanager;
+    GameManager gamemanager;
     public int money;
     void Start()
     {
+        //permet d'aller chercher le buildmanager
       //  money = Gamemanager.Money;
         buildManager = BuildManager.instance;
     }
+    //permet de choisir la tourelle selon le bouton que l'on clique
     public void GunTurretButton()
     {
       //  if (money >= 1)

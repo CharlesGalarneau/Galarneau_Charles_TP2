@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieSkeleton : Ennemies
+public interface IDamageable
 {
- 
+
+     void TakeDamage(bool Degats);
+
 }

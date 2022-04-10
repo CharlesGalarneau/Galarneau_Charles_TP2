@@ -10,14 +10,14 @@ public class Bomb : MonoBehaviour
     private float radius = 20f;
     public ParticleSystem Kaboom;
 
-    // Start is called before the first frame update
+    //se trouve une target a visée
     public void ReachEnnemies(Transform _target)
     {
         target = _target;
     }
 
 
-    // Update is called once per frame
+    //calcule la potion pour toucher l'ennemies
     void Update()
     {
         if (transform == null)
@@ -34,6 +34,7 @@ public class Bomb : MonoBehaviour
         }
         transform.Translate(Deplacement.normalized * distence, Space.World);
     }
+    //joue l'animation et les dégats selon un range
     public void Explode()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
@@ -41,10 +42,20 @@ public class Bomb : MonoBehaviour
     }
     void HitTarget()
     {
+        //delete le projectile
         Explode();
         Destroy(gameObject);
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ennemies"))
+        {
 
+            Ennemies ennemies = other.GetComponent<Ennemies>();
+
+            ennemies.Degats = true;
+        }
+    }
 
 }

@@ -11,14 +11,14 @@ public class Frost : MonoBehaviour
     private float radius = 20f;
     public ParticleSystem Frosty;
 
-    // Start is called before the first frame update
+    //se trouve une target a visée
     public void ReachEnnemies(Transform _target)
     {
         target = _target;
     }
 
 
-    // Update is called once per frame
+   
     void Update()
     {
         if (transform == null)
@@ -26,6 +26,7 @@ public class Frost : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        //calcule la potion pour toucher l'ennemies
         Vector3 Deplacement = target.position - transform.position;
         float distence = speed * Time.deltaTime;
         if (Deplacement.magnitude <= distence)
@@ -36,16 +37,25 @@ public class Frost : MonoBehaviour
         transform.Translate(Deplacement.normalized * distence, Space.World);
     }
     public void Coldburst()
-    {
+    {   //joue l'animation et les dégats selon un range
         //Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         Frosty.Play();
     }
     void HitTarget()
     {
         Coldburst();
-        
+        //détruit le projectile
         Destroy(gameObject);
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ennemies"))
+        {
 
+            Ennemies ennemies = other.GetComponent<Ennemies>();
+
+            ennemies.Degats = true;
+        }
+    }
 }

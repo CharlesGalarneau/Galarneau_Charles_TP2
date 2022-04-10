@@ -5,7 +5,7 @@ using UnityEngine;
 public class FrostTurret : MonoBehaviour
 {
     private GameObject ennemies;
-    gamemanager gamemanager;
+    GameManager gamemanager;
     Transform Target;
     float range = 15f;
     float MultiplicateurAngles = 10f;
@@ -21,10 +21,10 @@ public class FrostTurret : MonoBehaviour
     public AudioClip Son;
     AudioSource audioSource;
     public LineRenderer bulletTrail;
-
+    // appelles des différentes composantes besoins
     void Start()
     {
-        gamemanager = GetComponent<gamemanager>();
+        gamemanager = GetComponent<GameManager>();
         ennemies = GetComponent<GameObject>();
         audioSource = GetComponent<AudioSource>();
         
@@ -33,7 +33,7 @@ public class FrostTurret : MonoBehaviour
     }
     protected void ennemiesinReach()
     {
-
+        //détermine les ennemies les plus proches et fais une liste
         ListEnnemies = GameObject.FindGameObjectsWithTag(ennemiesTag);
 
         foreach (GameObject ennemies in ListEnnemies)
@@ -52,6 +52,7 @@ public class FrostTurret : MonoBehaviour
             }
         }
     }
+    //trouve la position pour viser l'ennemies 
     void Update()
     {
         ennemiesinReach();
@@ -74,7 +75,7 @@ public class FrostTurret : MonoBehaviour
         }
         FireCountdown -= Time.deltaTime;
     }
-    
+    //tire l'ennemies et joue les annimations et le son
     protected void Shooting()
     {
         
